@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import "./dist/output.css"
+import "./dist/output.css";
+import { Navbar, Welcome, Footer, Services, Transactions} from './components/*/';
 
 const App = () => {
   return (
