@@ -1,13 +1,21 @@
 import { useState } from 'react';
 import "./dist/output.css";
-import { Navbar, Welcome, Footer, Services, Transactions} from './components/*/';
+import Navbar from "./components/Navbar/Navbar";
+import Welcome from './components/Welcome/Welcome';
+import Transactions from './components/Transactions/Transactions';
+import Services from './components/Services/Services';
+import Footer from './components/Footer/Footer';
 
 const App = () => {
   return (
-    <div className="App">
-      <h1 class="text-3xl font-bold underline">
-        Hello world!
-      </h1>
+    <div className="min-h-screen">
+      <div className="gradient-bg-welcome">
+        <Navbar/>
+        <Welcome/>
+      </div>
+      <Services/>
+      <Transactions/>
+      <Footer/>
     </div>
   )
 }
