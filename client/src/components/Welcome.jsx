@@ -1,3 +1,4 @@
+// import React from 'react';
 import React, {useContext} from 'react';
 import { AiFillPlayCircle } from 'react-icons/ai';
 import {SiEthereum} from 'react-icons/si';
@@ -19,10 +20,10 @@ const Input = ({ placeholder, name, type, value, handleChange }) => (
 )
 
 const Welcome = () => {
-    const {value} = useContext(TransactionContext);
-  const connectWallet = () =>{
+    const {connectWallet} = useContext(TransactionContext);
+//   const connectWallet = () =>{
 
-  };
+//   };
 
   const handleSubmit = () => {
 
@@ -89,7 +90,7 @@ const Welcome = () => {
                     <Input placeholder="Enter Message" name="message" type="text" handleChange={() => {}}/>
                 
                     <div className='h-[1px] w-full bg-gray-400 my-2'/>
-                    {true ? (
+                    {false ? (
                         <Loader/>
                     ) : (
                         <button

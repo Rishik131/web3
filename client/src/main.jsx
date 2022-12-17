@@ -11,3 +11,12 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     </React.StrictMode>
   </TransactionProvider>
 ) 
+
+// ReactDOM.render(
+//   <TransactionProvider>
+//     <React.StrictMode>
+//       <App />
+//     </React.StrictMode>
+//   </TransactionProvider>,
+//   document.getElementById('root')
+// )
