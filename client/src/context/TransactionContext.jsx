@@ -51,6 +51,16 @@ export const TransactionProvider = ({ children }) => {
             if (!ethereum) return alert("Please install metamask");
             const {addressTo, amount, keyword, message} = formData;
             const transactionContract = getEthereumContract();
+            const parsedAmount = ethers.utils.parseEther(amount);
+            await ethereum.request({
+                method:'eth_sendTransaction',
+                params:[{
+                    from: currentAccount,
+                    to:addressTo,
+                    gas: '0x5208',
+                    value: parsedAmount._hex,
+                }]
+            })
         } catch (error) {
             console.log(error);
             throw new Error("No ethereum object.");
