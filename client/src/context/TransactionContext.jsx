@@ -1,4 +1,4 @@
-import React, { useState, useEffect,createContext } from "react";
+import React, { useState, useEffect, createContext } from "react";
 import { ethers } from 'ethers';
 import { contractABI, contractAddress } from '../utils/constants';
 
@@ -15,10 +15,27 @@ const getEthereumContract = () => {
     });
 }
 export const TransactionProvider = ({ children }) => {
-    const [connectedAccount, setConnectedAccount] = useState('');
+    const [currentAccount, setCurrentAccount] = useState('');
+    const [formData, setFormData] = useState({addressTo: '', amount:'', keyword:'', message:''});
+    const handleChange = (e,name) => {
+        setFormData((prevState) => ({...prevState,[name]:e.target.value})); 
+    }
     const checkIfWalletIsConnected = async () => {
-        if (!ethereum) return alert("Please install metamask");
-        const accounts = await ethereum.request({ method: 'eth_accounts' });
+        try {
+            if (!ethereum) return alert("Please install metamask");
+            const accounts = await ethereum.request({ method: 'eth_accounts' });
+            if (accounts.length) {
+                setCurrentAccount(accounts[0]);
+            }
+            else {
+                console.log('No accounts found');
+            }
+        }
+        catch (error)  {
+            console.log(error);
+            throw new Error("No ethereum object.");
+        }
+
         console.log(accounts);
     }
     const connectWallet = async () => {
@@ -33,11 +50,19 @@ export const TransactionProvider = ({ children }) => {
         }
 
     }
+    const sendTransaction = async () => {
+        try {
+            if (!ethereum) return alert("Please install metamask");
+        } catch (error) {
+            console.log(error);
+            throw new Error("No ethereum object.");
+        }
+    }
     useEffect(() => {
         checkIfWalletIsConnected();
     }, [])
     return (
-        <TransactionContext.Provider value={{ connectWallet }}>
+        <TransactionContext.Provider value={{ connectWallet, currentAccount, formData, setFormData, handleChange }}>
             {children}
         </TransactionContext.Provider>
     )
