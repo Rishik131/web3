@@ -8,11 +8,7 @@ const getEthereumContract = () => {
     const provider = new ethers.providers.web3Provider(ethereum);
     const signer = provider.getSigner();
     const transactionContract = new ethers.Contract(contractAddress, contractABI, signer);
-    console.log({
-        provider,
-        signer,
-        transactionContract
-    });
+    return transactionContract; 
 }
 export const TransactionProvider = ({ children }) => {
     const [currentAccount, setCurrentAccount] = useState('');
@@ -53,6 +49,8 @@ export const TransactionProvider = ({ children }) => {
     const sendTransaction = async () => {
         try {
             if (!ethereum) return alert("Please install metamask");
+            const {addressTo, amount, keyword, message} = formData;
+            const transactionContract = getEthereumContract();
         } catch (error) {
             console.log(error);
             throw new Error("No ethereum object.");
@@ -62,7 +60,7 @@ export const TransactionProvider = ({ children }) => {
         checkIfWalletIsConnected();
     }, [])
     return (
-        <TransactionContext.Provider value={{ connectWallet, currentAccount, formData, setFormData, handleChange }}>
+        <TransactionContext.Provider value={{ connectWallet, currentAccount, formData, setFormData, handleChange, sendTransaction }}>
             {children}
         </TransactionContext.Provider>
     )
