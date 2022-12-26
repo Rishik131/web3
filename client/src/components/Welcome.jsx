@@ -81,7 +81,7 @@ const Welcome = () => {
                             </div>
                             <div>
                                 <p className='text-white font-light text text-sm'>
-                                    #Address
+                                    {currentAccount}
                                 </p>
                                 <p className='text-white font-semibold text text-lg mt-1'>
                                     Ethereum
